@@ -2,7 +2,7 @@
 services:
   db:
     image: karthik621/home:dbimage
-     deploy:
+    deploy:
       replicas: 1
     ports:
       - "3306:3306"
@@ -11,7 +11,7 @@ services:
 
   auth_service:
     image: karthik621/home:authimage
-     deploy:
+    deploy:
       replicas: 1
     ports:
       - "5001:5001"
@@ -33,7 +33,7 @@ services:
    
   borrow_service:
     image: karthik621/home:borrowimage
-     deploy:
+    deploy:
       replicas: 1
     ports:
       - "5003:5003"
