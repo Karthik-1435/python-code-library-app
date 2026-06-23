@@ -1,41 +1,46 @@
 ---
 services:
   db:
-    image: karthik621/home:dbimage
+    image: karthik621/home/dbimage
     ports:
       - "3306:3306"
     deploy:
       replicas: 1
+
   auth_service:
-    image:  karthik621/home:authimage
+    image: karthik621/home/authimage
     ports:
       - "5001:5001"
     deploy:
       replicas: 1
     depends_on:
-      - db
+        - db
+
   book_service:
-    image:  karthik621/home:bookimage
+    image: karthik621/home/bookimage
     ports:
       - "5002:5002"
     deploy:
       replicas: 1
     depends_on:
-      - db
+        - db
+
   borrow_service:
-    image:  karthik621/home:borrowimage
+    image: karthik621/home/borrowimage
     ports:
       - "5003:5003"
     deploy:
       replicas: 1
     depends_on:
-      - db
+        - db
+
   app_service:
-    image:  karthik621/home:appimage
+    image: karthik621/home/frontend
     ports:
       - "5000:5000"
     deploy:
       replicas: 1
+
     depends_on:
       - auth_service
       - book_service
