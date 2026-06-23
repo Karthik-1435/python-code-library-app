@@ -1,51 +1,62 @@
-version: "3.8"
-
+---
 services:
   db:
     image: karthik621/home:dbimage
+     deploy:
+      replicas: 1
     ports:
       - "3306:3306"
     networks:
       - mynetwork
-    deploy:
-      replicas: 1
 
   auth_service:
     image: karthik621/home:authimage
+     deploy:
+      replicas: 1
     ports:
       - "5001:5001"
     networks:
       - mynetwork
-    deploy:
-      replicas: 1
-
+    depends_on:
+      - db
+   
   book_service:
     image: karthik621/home:bookimage
+    deploy:
+      replicas: 1
     ports:
       - "5002:5002"
     networks:
       - mynetwork
-    deploy:
-      replicas: 1
-
+    depends_on:
+      - db
+   
   borrow_service:
     image: karthik621/home:borrowimage
+     deploy:
+      replicas: 1
     ports:
       - "5003:5003"
     networks:
       - mynetwork
-    deploy:
-      replicas: 1
+    depends_on:
+      - db
 
   app_service:
-    image: karthik621/home:appimage
+    image: karthik621/home:frontend
+    deploy:
+      replicas: 1
     ports:
       - "5000:5000"
     networks:
       - mynetwork
-    deploy:
-      replicas: 1
+    depends_on:
+      - auth_service
+      - book_service
+      - borrow_service
+      
 
+      
 networks:
   mynetwork:
     driver: overlay
