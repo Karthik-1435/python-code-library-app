@@ -1,7 +1,7 @@
 ---
 services:
   db:
-    image: karthik621/home:db_image
+    image: karthik621/pyapp:db_image
     deploy:
       replicas: 1
     ports:
@@ -10,7 +10,7 @@ services:
       - mynetwork
 
   auth_service:
-    image: karthik621/home:auth_image
+    image: karthik621/pyapp:auth_image
     deploy:
       replicas: 1
     ports:
@@ -21,7 +21,7 @@ services:
       - db
    
   book_service:
-    image: karthik621/home:book_image
+    image: karthik621/pyapp:book_image
     deploy:
       replicas: 1
     ports:
@@ -32,7 +32,7 @@ services:
       - db
    
   borrow_service:
-    image: karthik621/home:borrow_image
+    image: karthik621/pyapp:borrow_image
     deploy:
       replicas: 1
     ports:
@@ -43,7 +43,7 @@ services:
       - db
 
   app_service:
-    image: karthik621/home:frontend
+    image: karthik621/pyapp:frontend
     deploy:
       replicas: 1
     ports:
